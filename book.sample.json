@@ -1,0 +1,14 @@
+{
+  "contacts": {
+    "tahu": {
+      "name": "Vytautas Jakutis",
+      "nickname" : "tahu",
+      "number": "868888888"
+    }
+  },
+  "groups": {
+    "retrieverbot": [
+      "tahu"
+    ]
+  }
+}

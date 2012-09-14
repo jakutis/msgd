@@ -1,0 +1,41 @@
+{
+  "name": "msgd",
+  "description": "A messagging daemon - sms, etc.",
+  "version": "0.0.0",
+  "keywords": [
+    "message",
+    "messaging",
+    "daemon",
+    "http",
+    "sms",
+    "smsd"
+  ],
+  "homepage": "https://jakut.is/git/MSGD/about/",
+  "maintainers": [
+    {
+      "name": "Vytautas Jakutis",
+      "email": "vytautas@jakut.is",
+      "web": "https://jakut.is/"
+    }
+  ],
+  "bin": {},
+  "contributors": [],
+  "bugs": "mailto:vytautas@jakut.is",
+  "license": {
+    "type": "mit",
+    "url": "https://jakut.is/git/MSGD/plain/LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://jakut.is/MSGD"
+  },
+  "dependencies": {
+    "bean" : "1.0.x",
+    "valentine" : "1.5.x",
+    "async" : "0.1.x"
+  },
+  "main": "lib/server.js",
+  "engines": {
+    "node": "*"
+  }
+}
