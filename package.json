@@ -19,7 +19,7 @@
     }
   ],
   "bin": {
-    "msgd" : "./lib/server.js"
+    "msgd" : "./bin/msgd"
   },
   "contributors": [],
   "bugs": "mailto:vytautas@jakut.is",
