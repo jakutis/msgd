@@ -23,10 +23,7 @@
   },
   "contributors": [],
   "bugs": "mailto:vytautas@jakut.is",
-  "license": {
-    "type": "mit",
-    "url": "https://jakut.is/git/MSGD/plain/LICENSE"
-  },
+  "license": "GPL-3.0",
   "repository": {
     "type": "git",
     "url": "https://jakut.is/git/MSGD"
