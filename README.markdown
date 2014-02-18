@@ -1,15 +1,29 @@
 # msgd
 
-Description: A messagging daemon - sms, etc.
+A messagging daemon - sms, etc.
 
-Home page: [jakut.is/git/MSGD/about](https://jakut.is/git/MSGD/about/)
+- [Overview](#overview)
+- [Installation](#installation)
+- [CLI](#cli)
+- [Development](#development)
 
-[npm](https://npmjs.org) package: [msgd](https://npmjs.org/package/msgd)
+## Overview
 
-![npm stats](https://nodei.co/npm/msgd.png)
+    TODO
 
-![npm download stats](https://nodei.co/npm-dl/msgd.png?months=9)
+## Installation
 
-License: [GPLv2](https://jakut.is/git/MSGD/plain/LICENSE)
+  Install with [npm](https://www.npmjs.org/package/msgd):
 
-Author: [Vytautas Jakutis](https://jakut.is)
+    $ npm install --global msgd
+
+## CLI
+
+  Run:
+
+    $ msgd
+
+## Development
+
+    TODO
+
