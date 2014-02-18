@@ -2,6 +2,7 @@
   "name": "msgd",
   "description": "A messagging daemon - sms, etc.",
   "version": "0.3.1",
+  "author": "Vytautas Jakutis <vytautas@jakut.is> (https://jakut.is/)",
   "keywords": [
     "message",
     "messaging",
@@ -10,7 +11,7 @@
     "sms",
     "smsd"
   ],
-  "homepage": "https://jakut.is/git/MSGD/about/",
+  "homepage": "https://www.npmjs.org/package/msgd",
   "maintainers": [
     {
       "name": "Vytautas Jakutis",
@@ -20,11 +21,11 @@
   ],
   "bin": "cli.js",
   "contributors": [],
-  "bugs": "mailto:vytautas@jakut.is",
+  "bugs": "https://github.com/jakutis/msgd/issues",
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "https://jakut.is/git/MSGD"
+    "url": "https://github.com/jakutis/msgd"
   },
   "dependencies": {
     "bean" : "1.0.x",
