@@ -1,7 +1,6 @@
 var Database = require('./Database');
 var Promise = require('bluebird');
 var fs = Promise.promisifyAll(require('fs'));
-var log = console.log.bind(console);
 var getMessageId = function(message) {
     return message.id;
 };
@@ -36,7 +35,9 @@ function moveFromDBToFile(db, file) {
 
 moveFromDBToFile(new Database({
     adb: cfg.adb
-}), cfg.messages).then(log, function(err) {
-    log(err.stack);
+}), cfg.messages)
+.then(JSON.stringify)
+.then(process.stdout.write.bind(process.stdout), function(err) {
+    process.stderr.write(err.stack);
     process.exitCode = 1;
 });
