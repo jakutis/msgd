@@ -8,6 +8,9 @@ var firstElement = function (array) {
     }
     return array[0];
 };
+var numberToDate = function(number) {
+    return new Date(number);
+};
 
 module.exports = Database;
 
@@ -69,7 +72,7 @@ Database.prototype = {
         return this.readMessagePropertyById(id, 'address', cb);
     },
     readMessageDateById: function (id) {
-        return this.readMessagePropertyById(id, 'date').then(Number).then(Date);
+        return this.readMessagePropertyById(id, 'date').then(Number).then(numberToDate);
     },
     readMessageById: function (id) {
         return Promise.props({
