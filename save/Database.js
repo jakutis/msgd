@@ -1,8 +1,9 @@
 var Promise = require('bluebird');
 var spawn = require('child_process').spawn;
-var noop = function() {};
-var firstElement = function(array) {
-    if(array.length === 0) {
+var noop = function () {
+};
+var firstElement = function (array) {
+    if (array.length === 0) {
         throw new Error();
     }
     return array[0];
@@ -16,8 +17,8 @@ function Database(cfg) {
 
 Database.prototype = {
     _cfg: null,
-    _query: function(sql) {
-        return new Promise(function(resolve, reject) {
+    _query: function (sql) {
+        return new Promise(function (resolve, reject) {
             var inputProcess = spawn(this._cfg.adb, [
                 'shell',
                 'sqlite3',
@@ -25,11 +26,11 @@ Database.prototype = {
                 sql.toString()
             ]);
             var results = '';
-            inputProcess.stdout.on('data', function(data) {
+            inputProcess.stdout.on('data', function (data) {
                 results += data.toString();
             });
-            inputProcess.on('exit', function(code) {
-                if(code === 0) {
+            inputProcess.on('exit', function (code) {
+                if (code === 0) {
                     var rows = results.split('\r\n');
                     rows.pop();
                     resolve(rows);
@@ -39,38 +40,38 @@ Database.prototype = {
             });
         }.bind(this));
     },
-    readMessageIds: function() {
+    readMessageIds: function () {
         return this._query('SELECT date,address FROM sms');
     },
-    _idToWhere: function(stringId) {
+    _idToWhere: function (stringId) {
         var id = stringId.split('|');
         var address = id[1].substr(0, 1) === '+' ? ('+' + Number(id[1].substr(1))) : Number(id);
-        return 'date='+Number(id[0])+' AND address=\'' + address + '\'';
+        return 'date=' + Number(id[0]) + ' AND address=\'' + address + '\'';
     },
-    readMessageCountById: function(id) {
+    readMessageCountById: function (id) {
         return this._query('SELECT COUNT(*) FROM sms WHERE ' + this._idToWhere(id)).then(firstElement).then(Number);
     },
-    readMessagePropertyById: function(id, property) {
-        if(['body', 'address', 'date'].indexOf(property) < 0) {
+    readMessagePropertyById: function (id, property) {
+        if (['body', 'address', 'date'].indexOf(property) < 0) {
             return Promise.reject();
         }
-        return this.readMessageCountById(id).then(function(count) {
-            if(count !== 1) {
+        return this.readMessageCountById(id).then(function (count) {
+            if (count !== 1) {
                 throw new Error();
             }
             return this._query('SELECT ' + property + ' FROM sms WHERE ' + this._idToWhere(id)).then(firstElement);
         }.bind(this));
     },
-    readMessageBodyById: function(id, cb) {
+    readMessageBodyById: function (id, cb) {
         return this.readMessagePropertyById(id, 'body', cb);
     },
-    readMessageAuthorById: function(id, cb) {
+    readMessageAuthorById: function (id, cb) {
         return this.readMessagePropertyById(id, 'address', cb);
     },
-    readMessageDateById: function(id) {
+    readMessageDateById: function (id) {
         return this.readMessagePropertyById(id, 'date').then(Number).then(Date);
     },
-    readMessageById: function(id) {
+    readMessageById: function (id) {
         return Promise.props({
             id: Promise.resolve(id),
             author: this.readMessageAuthorById(id),
@@ -78,9 +79,9 @@ Database.prototype = {
             body: this.readMessageBodyById(id)
         });
     },
-    deleteMessageById: function(id) {
-        return this.readMessageCountById(id).then(function(count) {
-            if(count !== 1) {
+    deleteMessageById: function (id) {
+        return this.readMessageCountById(id).then(function (count) {
+            if (count !== 1) {
                 throw new Error();
             }
             return this._query('DELETE FROM sms WHERE ' + this._idToWhere(id)).then(noop);
