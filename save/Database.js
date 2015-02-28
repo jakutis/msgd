@@ -1,9 +1,6 @@
 var Promise = require('bluebird');
 var spawn = require('child_process').spawn;
 var noop = function() {};
-var stringArrayToNumberArray = function(array) {
-    return array.map(Number);
-};
 var firstElement = function(array) {
     if(array.length === 0) {
         throw new Error();
