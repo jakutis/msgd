@@ -48,8 +48,10 @@ Database.prototype = {
     },
     _idToWhere: function (stringId) {
         var id = stringId.split('|');
-        var address = id[1].substr(0, 1) === '+' ? ('+' + Number(id[1].substr(1))) : Number(id);
-        return 'date=' + Number(id[0]) + ' AND address=\'' + address + '\'';
+        if(id.length !== 2 || !/^[0-9]+$/.test(id[0]) || !/^[a-zA-Z0-9+-]+$/.test(id[1])) {
+            throw new Error();
+        }
+        return 'date=' + id[0] + ' AND address=\'' + id[1] + '\'';
     },
     readMessageCountById: function (id) {
         return this._query('SELECT COUNT(*) FROM sms WHERE ' + this._idToWhere(id)).then(firstElement).then(Number);
