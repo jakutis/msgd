@@ -17,7 +17,7 @@ function moveFromDBToFile(db, file) {
     };
     return Promise.props({
         'existing': fs.readFileAsync(file).then(JSON.parse),
-        'new': db.readMessageIds().map(db.readMessageById.bind(db))
+        'new': db.readMessageIds().map(db.readMessageById.bind(db), {concurrency: 1})
     })
         .then(function (messages) {
             var existingIds = messages.existing.map(getMessageId);
@@ -29,7 +29,7 @@ function moveFromDBToFile(db, file) {
         .then(JSON.stringify)
         .then(fs.writeFileAsync.bind(fs, file))
         .then(getNewIds)
-        .map(db.deleteMessageById.bind(db))
+        .map(db.deleteMessageById.bind(db), {concurrency: 1})
         .then(getNewIds);
 }
 
